@@ -1,27 +1,32 @@
-package com.example.felixargila.mvpprueba.domain;
+package com.example.felixargila.mvpprueba.domain.home;
 
 import com.example.felixargila.mvpprueba.data.api.RetrofitManager;
 import com.example.felixargila.mvpprueba.domain.model.VideoItem;
-import com.example.felixargila.mvpprueba.presenter.MainPresenter;
+import com.example.felixargila.mvpprueba.presenter.home.HomePresenter;
 
 import java.util.List;
 
 import retrofit2.Response;
 
 /**
- * Created by felixargila on 17/10/17.
+ * Created by felixargila on 18/10/17.
  */
 
-public class MainInteractorImp  implements MainInteractor {
+public class HomeInteractorImp implements HomeInteractor {
+
 
     private RetrofitManager retrofitManager;
-    private MainPresenter.OnDataLoaded onDataLoaded;
+    private HomePresenter.OnDataLoaded onDataLoaded;
 
-    public MainInteractorImp(MainPresenter.OnDataLoaded onDataLoaded) {
+    public HomeInteractorImp(HomePresenter.OnDataLoaded onDataLoaded) {
         this.onDataLoaded  = onDataLoaded;
-        retrofitManager = new RetrofitManager(this.onRetrofitJsonResponse);
+        retrofitManager = new RetrofitManager(onRetrofitJsonResponse);
     }
 
+    @Override
+    public void loadData() {
+        retrofitManager.loadVideos();
+    }
 
     private OnRetrofitJsonResponse onRetrofitJsonResponse = new OnRetrofitJsonResponse() {
         @Override
@@ -34,10 +39,4 @@ public class MainInteractorImp  implements MainInteractor {
             onDataLoaded.onError();
         }
     };
-
-
-    @Override
-    public void loadData() {
-        retrofitManager.loadVideos();
-    }
 }

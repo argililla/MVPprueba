@@ -1,4 +1,4 @@
-package com.example.felixargila.mvpprueba.domain;
+package com.example.felixargila.mvpprueba.domain.home;
 
 import com.example.felixargila.mvpprueba.domain.model.VideoItem;
 
@@ -7,11 +7,10 @@ import java.util.List;
 import retrofit2.Response;
 
 /**
- * Created by felixargila on 17/10/17.
+ * Created by felixargila on 18/10/17.
  */
 
-public interface MainInteractor {
-
+public interface HomeInteractor {
     void loadData();
 
     interface OnRetrofitJsonResponse {
@@ -19,5 +18,3 @@ public interface MainInteractor {
         void onError();
     }
 }
-
-

@@ -1,13 +1,14 @@
-package com.example.felixargila.mvpprueba.ui.activity;
+package com.example.felixargila.mvpprueba.ui.home.fragment;
 
 import com.example.felixargila.mvpprueba.domain.model.VideoItem;
 
 import java.util.List;
 
 /**
- * Created by felixargila on 17/10/17.
+ * Created by felixargila on 18/10/17.
  */
 
-public interface MainView {
+public interface HomeView {
+
     void updateAdapter(List<VideoItem> itemList);
 }
