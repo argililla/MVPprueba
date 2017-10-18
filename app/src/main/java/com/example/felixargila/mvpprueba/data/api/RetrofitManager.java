@@ -20,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitManager implements Callback<List<VideoItem>> {
 
     MainInteractor.OnRetrofitJsonResponse onRetrofitJsonResponse;
+    private static String BASE_URL = "https://s3-us-west-2.amazonaws.com/youtubeassets/";
 
     public RetrofitManager(MainInteractor.OnRetrofitJsonResponse onRetrofitJsonResponse) {
         this.onRetrofitJsonResponse = onRetrofitJsonResponse;
@@ -29,11 +30,10 @@ public class RetrofitManager implements Callback<List<VideoItem>> {
 
     public void loadVideos() {
         Gson gson = new GsonBuilder().setLenient().create();
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://s3-us-west-2.amazonaws.com/youtubeassets/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
 
-
-        JsonYoutubeApi youtubeApi = retrofit.create(JsonYoutubeApi.class);
-        Call<List<VideoItem>> call = youtubeApi.getHomeVideos();
+        RetrofitEndpointApi api = retrofit.create(RetrofitEndpointApi.class);
+        Call<List<VideoItem>> call = api.getHomeVideos();
 
         call.enqueue(this);
     }
@@ -47,6 +47,5 @@ public class RetrofitManager implements Callback<List<VideoItem>> {
     @Override
     public void onFailure(Call<List<VideoItem>> call, Throwable t) {
         onRetrofitJsonResponse.onError();
-
     }
 }

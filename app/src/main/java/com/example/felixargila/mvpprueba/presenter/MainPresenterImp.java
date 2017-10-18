@@ -35,6 +35,8 @@ public class MainPresenterImp  implements MainPresenter{
   OnDataLoaded onDataLoaded = new OnDataLoaded() {
       @Override
       public void onSuccess(Response<List<VideoItem>> response) {
+          List<VideoItem> itemList = parseResponseToList(response);
+          view.updateAdapter(itemList);
 
       }
 
