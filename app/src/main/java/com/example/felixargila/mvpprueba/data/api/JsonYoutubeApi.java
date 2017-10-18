@@ -14,4 +14,10 @@ import retrofit2.http.GET;
 public interface JsonYoutubeApi {
     @GET("home.json")
     Call<List<VideoItem>>getHomeVideos();
+
+    @GET("subscriptions.json")
+    Call<List<VideoItem>>getSubscriptionsVideos();
+
+    @GET("trending.json")
+    Call<List<VideoItem>>getTrendingVideos();
 }
