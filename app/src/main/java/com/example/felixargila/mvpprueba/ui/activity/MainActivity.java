@@ -10,11 +10,16 @@ import com.example.felixargila.mvpprueba.R;
 import com.example.felixargila.mvpprueba.presenter.MainPresenter;
 import com.example.felixargila.mvpprueba.presenter.MainPresenterImp;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity  implements MainView{
 
     private MainPresenter presenter;
-    private Button btn;
-    private TextView tv1;
+    @BindView(R.id.btn) Button btn;
+    //private Button btn;
+    @BindView(R.id.tv1) TextView tv1;
+    //private TextView tv1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +27,10 @@ public class MainActivity extends AppCompatActivity  implements MainView{
         setContentView(R.layout.activity_main);
         presenter = new MainPresenterImp(this);
 
-        btn = (Button)findViewById(R.id.btn);
-        tv1 = (TextView)findViewById(R.id.tv1);
+        ButterKnife.bind(this);
+
+        //btn = (Button)findViewById(R.id.btn);
+        //tv1 = (TextView)findViewById(tv1);
 
 
         btn.setOnClickListener(new View.OnClickListener() {

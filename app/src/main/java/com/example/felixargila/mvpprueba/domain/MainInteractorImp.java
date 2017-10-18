@@ -11,6 +11,6 @@ public class MainInteractorImp  implements MainInteractor {
 
     @Override
     public String getTexto() {
-        return "eeeeeeeee";
+        return "Ahora parece que está funcionando";
     }
 }
