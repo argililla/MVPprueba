@@ -31,8 +31,8 @@ public class HomePresenterImp  implements HomePresenter {
     }
 
     @Override
-    public void loadData() {
-        interactor.loadData();
+    public void loadData(String page) {
+        interactor.loadData(page);
 
     }
 

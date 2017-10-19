@@ -1,5 +1,7 @@
 package com.example.felixargila.mvpprueba.data.api;
 
+import android.widget.Switch;
+
 import com.example.felixargila.mvpprueba.domain.home.HomeInteractor;
 import com.example.felixargila.mvpprueba.domain.model.VideoItem;
 import com.google.gson.Gson;
@@ -28,14 +30,30 @@ public class RetrofitManager implements Callback<List<VideoItem>> {
 
 
 
-    public void loadVideos() {
+    public void loadVideos(String page) {
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
 
         RetrofitEndpointApi api = retrofit.create(RetrofitEndpointApi.class);
-        Call<List<VideoItem>> call = api.getHomeVideos();
+        Call<List<VideoItem>> call = null;
+        switch (page){
+            case "0":
+                 call = api.getHomeVideos();
+                break;
+            case "1":
+                call = api.getTrendingVideos();
+                break;
+            case "2":
+                call = api.getSubscriptionsVideos();
+                break;
+            case "3":
+            default:
+                break;
+        }
+        if (call !=  null){
+            call.enqueue(this);
+        }
 
-        call.enqueue(this);
     }
 
     @Override

@@ -12,7 +12,7 @@ import retrofit2.Response;
 
 public interface HomePresenter {
 
-    void loadData();
+    void loadData(String title);
 
     interface OnDataLoaded {
         void onSuccess(Response<List<VideoItem>> response);

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +29,20 @@ public class HomeFragment extends Fragment implements HomeView {
     private RecyclerView recyclerView;
     private HomePresenter presenter;
 
+
+
     public HomeFragment() {
         presenter = new HomePresenterImp(this);
+    }
+
+    public static HomeFragment newInstance(String title) {
+        HomeFragment fragment = new HomeFragment();
+
+        Bundle args = new Bundle();
+        args.putCharSequence("title", title);
+        fragment.setArguments(args);
+
+        return fragment;
     }
 
 
@@ -39,6 +52,7 @@ public class HomeFragment extends Fragment implements HomeView {
 
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+
         videoItemList = new ArrayList<>();
 
         recyclerView = v.findViewById(R.id.recycler);
@@ -46,14 +60,23 @@ public class HomeFragment extends Fragment implements HomeView {
         adapter = new HomeAdapter(getContext(), videoItemList);
         recyclerView.setAdapter(adapter);
 
-        presenter.loadData();
+
+        presenter.loadData(getTitle());
         // Inflate the layout for this fragment
         return v;
     }
 
+    public String getTitle() {
+        Bundle args = getArguments();
+        return (String) args.getCharSequence("title", "NO TITLE FOUND");
+    }
 
     @Override
     public void updateAdapter(List<VideoItem> itemList) {
         adapter.updateList(itemList);
     }
+
+
+
+
 }

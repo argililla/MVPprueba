@@ -24,8 +24,8 @@ public class HomeInteractorImp implements HomeInteractor {
     }
 
     @Override
-    public void loadData() {
-        retrofitManager.loadVideos();
+    public void loadData(String page) {
+        retrofitManager.loadVideos(page);
     }
 
     private OnRetrofitJsonResponse onRetrofitJsonResponse = new OnRetrofitJsonResponse() {

@@ -11,7 +11,7 @@ import retrofit2.Response;
  */
 
 public interface HomeInteractor {
-    void loadData();
+    void loadData(String page);
 
     interface OnRetrofitJsonResponse {
         void onSuccess(Response<List<VideoItem>> response);
