@@ -1,10 +1,12 @@
 package com.example.felixargila.mvpprueba.ui.main.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.felixargila.mvpprueba.R;
 import com.example.felixargila.mvpprueba.ui.main.adapter.ViewPagerAdapter;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     };
     private ViewPagerAdapter adapter;
     private ActionBar actionBar;
+    boolean doubleBackToExitPressedOnce = false;
 
 
     @Override
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setupTabIcons();
     }
 
+
     private void setupViewPager() {
         adapter.addFragment(MainFragment.newInstance("0"),"one");
         adapter.addFragment(MainFragment.newInstance("1"), "two");
@@ -58,5 +62,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Pulse ATRAS de nuevo para salir", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.felixargila.mvpprueba.ui.main.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,14 +15,12 @@ import com.example.felixargila.mvpprueba.domain.model.VideoItem;
 import com.example.felixargila.mvpprueba.presenter.main.MainPresenter;
 
 import com.example.felixargila.mvpprueba.presenter.main.MainPresenterImp;
+import com.example.felixargila.mvpprueba.ui.detail.activity.DetailActivity;
 import com.example.felixargila.mvpprueba.ui.main.adapter.MainAdapter;
+import com.example.felixargila.mvpprueba.ui.main.adapter.OnAdapterItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
-
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +31,7 @@ public class MainFragment extends Fragment implements MainView {
     private List<VideoItem> videoItemList;
     private RecyclerView recyclerView;
     private MainPresenter presenter;
+
 
 
 
@@ -55,7 +55,7 @@ public class MainFragment extends Fragment implements MainView {
         videoItemList = new ArrayList<>();
         recyclerView = v.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new MainAdapter(getContext(), videoItemList);
+        adapter = new MainAdapter(getContext(), videoItemList, onAdapterItemClickListener);
         recyclerView.setAdapter(adapter);
 
         presenter.loadData(getTitle());
@@ -63,6 +63,15 @@ public class MainFragment extends Fragment implements MainView {
         return v;
     }
 
+    private final OnAdapterItemClickListener onAdapterItemClickListener = new OnAdapterItemClickListener() {
+        @Override
+        public void onItemClick(VideoItem item) {
+
+            Intent intent = new Intent(getActivity(), DetailActivity.class);
+            intent.putExtra("objetoVideo", item);
+            startActivity(intent);
+        }
+    };
 
     public String getTitle() {
         Bundle args = getArguments();
@@ -75,3 +84,4 @@ public class MainFragment extends Fragment implements MainView {
     }
 
 }
+

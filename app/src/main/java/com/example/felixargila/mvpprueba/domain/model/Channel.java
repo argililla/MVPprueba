@@ -1,10 +1,12 @@
 package com.example.felixargila.mvpprueba.domain.model;
 
+import java.io.Serializable;
+
 /**
  * Created by pablorojas on 18/10/17.
  */
 
-public class Channel {
+public class Channel implements Serializable{
 
     private String name, profile_image_name;
 
