@@ -1,4 +1,4 @@
-package com.example.felixargila.mvpprueba.ui.home.adapter;
+package com.example.felixargila.mvpprueba.ui.main.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -21,13 +21,13 @@ import butterknife.ButterKnife;
  * Created by felixargila on 18/10/17.
  */
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> {
 
 
     private Context mContext;
     private List<VideoItem> videoItemList;
 
-    public HomeAdapter(Context mContext, List<VideoItem> videoItemList) {
+    public MainAdapter(Context mContext, List<VideoItem> videoItemList) {
         this.mContext = mContext;
         this.videoItemList = videoItemList;
     }
@@ -41,7 +41,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card, parent, false);
-        return new HomeAdapter.MyViewHolder(view);
+        return new MainAdapter.MyViewHolder(view);
 
     }
 

@@ -1,8 +1,6 @@
 package com.example.felixargila.mvpprueba.data.api;
 
-import android.widget.Switch;
-
-import com.example.felixargila.mvpprueba.domain.home.HomeInteractor;
+import com.example.felixargila.mvpprueba.domain.main.MainInteractor;
 import com.example.felixargila.mvpprueba.domain.model.VideoItem;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,10 +19,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitManager implements Callback<List<VideoItem>> {
 
-    HomeInteractor.OnRetrofitJsonResponse onRetrofitJsonResponse;
+    MainInteractor.OnRetrofitJsonResponse onRetrofitJsonResponse;
     private static String BASE_URL = "https://s3-us-west-2.amazonaws.com/youtubeassets/";
 
-    public RetrofitManager(HomeInteractor.OnRetrofitJsonResponse onRetrofitJsonResponse) {
+
+    public RetrofitManager(MainInteractor.OnRetrofitJsonResponse onRetrofitJsonResponse) {
         this.onRetrofitJsonResponse = onRetrofitJsonResponse;
     }
 

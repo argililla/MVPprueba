@@ -5,19 +5,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.example.felixargila.mvpprueba.R;
-import com.example.felixargila.mvpprueba.presenter.main.MainPresenter;
-import com.example.felixargila.mvpprueba.presenter.main.MainPresenterImp;
 import com.example.felixargila.mvpprueba.ui.main.adapter.ViewPagerAdapter;
-import com.example.felixargila.mvpprueba.ui.home.fragment.HomeFragment;
+import com.example.felixargila.mvpprueba.ui.main.fragment.MainFragment;
 
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity  implements MainView{
-
-    private MainPresenter presenter;
+public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -39,23 +34,19 @@ public class MainActivity extends AppCompatActivity  implements MainView{
 
         actionBar = getSupportActionBar();
         actionBar.setElevation(0);
-        presenter = new MainPresenterImp(this);
-        viewPager = (ViewPager)findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         setupViewPager();
-        tabLayout = (TabLayout)findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-
-
-
     }
 
     private void setupViewPager() {
-        adapter.addFragment(HomeFragment.newInstance("0"),"one");
-        adapter.addFragment(HomeFragment.newInstance("1"), "two");
-        adapter.addFragment(HomeFragment.newInstance("2"), "three");
-        adapter.addFragment(HomeFragment.newInstance("3"), "four");
+        adapter.addFragment(MainFragment.newInstance("0"),"one");
+        adapter.addFragment(MainFragment.newInstance("1"), "two");
+        adapter.addFragment(MainFragment.newInstance("2"), "three");
+        adapter.addFragment(MainFragment.newInstance("3"), "four");
         viewPager.setAdapter(adapter);
     }
 
@@ -64,7 +55,6 @@ public class MainActivity extends AppCompatActivity  implements MainView{
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
         tabLayout.getTabAt(3).setIcon(tabIcons[3]);
-
     }
 
 
