@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment implements MainView {
+public class MainFragment extends Fragment implements MainView, OnAdapterItemClickListener {
 
     private MainAdapter adapter;
     private List<VideoItem> videoItemList;
@@ -55,7 +55,7 @@ public class MainFragment extends Fragment implements MainView {
         videoItemList = new ArrayList<>();
         recyclerView = v.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new MainAdapter(getContext(), videoItemList, onAdapterItemClickListener);
+        adapter = new MainAdapter(getContext(), videoItemList, this);
         recyclerView.setAdapter(adapter);
 
         presenter.loadData(getTitle());
@@ -63,15 +63,6 @@ public class MainFragment extends Fragment implements MainView {
         return v;
     }
 
-    private final OnAdapterItemClickListener onAdapterItemClickListener = new OnAdapterItemClickListener() {
-        @Override
-        public void onItemClick(VideoItem item) {
-
-            Intent intent = new Intent(getActivity(), DetailActivity.class);
-            intent.putExtra("objetoVideo", item);
-            startActivity(intent);
-        }
-    };
 
     public String getTitle() {
         Bundle args = getArguments();
@@ -83,5 +74,11 @@ public class MainFragment extends Fragment implements MainView {
         adapter.updateList(itemList);
     }
 
+    @Override
+    public void onItemClick(VideoItem item) {
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra("objetoVideo", item);
+        startActivity(intent);
+    }
 }
 
